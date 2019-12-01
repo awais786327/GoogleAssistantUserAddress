@@ -9,6 +9,10 @@ const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 const app = express().use(bodyParser.json());
 
+const localStorage = require('local-storage');
+
+localStorage('userStorage', []);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
