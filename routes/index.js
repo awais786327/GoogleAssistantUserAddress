@@ -44,7 +44,8 @@ function getTypesOfThingsCanManageResponse(conv, paylaod) {
   return axios.post(getAddressResponseAPI, paylaod)
     .then(response => {
       console.log(`response : `, response.data, `\n`);
-      return conv.ask(`${response.data.text} \n\n Would you like to ask anything ?`);
+      conv.ask(`${response.data.text}`);
+      return conv.ask(`Would you like to ask anything ?`);
     })
     .catch(error => {
       console.log(`error : `, error.response.statusText, `\n`);
