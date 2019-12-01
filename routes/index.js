@@ -40,7 +40,7 @@ function askForLocation(conv, material) {
 }
 
 function getTypesOfThingsCanManageResponse(conv, paylaod) {
-  console.log(`paylaod : `, paylaod, `\n`);
+  console.log(`paylaod > `, paylaod, `\n`);
   return axios.post(getAddressResponseAPI, paylaod)
     .then(response => {
       console.log(`response : `, response.data, `\n`);
