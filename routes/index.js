@@ -94,16 +94,15 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
 
   const userStorage = localStorage('userStorage');
 
+  const {city, coordinates, formattedAddress} = conv.device.location;
+
   if (userStorage.requestedPermissionType === 'DEVICE_COARSE_LOCATION') {
-    const {city, formattedAddress} = conv.device.location;
-    userStorage['address'] = formattedAddress;
+    userStorage['address'] = formattedAddress || 'Address';
     userStorage['location'] = city;
   }
 
   if (userStorage.requestedPermissionType === 'DEVICE_PRECISE_LOCATION') {
-    const {coordinates, formattedAddress} = conv.device.location;
-    console.log(conv);
-    userStorage['address'] = formattedAddress;
+    userStorage['address'] = formattedAddress || 'Address';
     userStorage['location'] = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
