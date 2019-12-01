@@ -115,7 +115,7 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
 
 app.intent('Clear Storage', (conv) => {
   localStorage.clear();
-  console.log('\n------------------------ Storage Cleared ------------------------\n');
+  console.log('\n----------------------- Storage Cleared -----------------------\n');
   return conv.close(`All clear`);
 });
 
