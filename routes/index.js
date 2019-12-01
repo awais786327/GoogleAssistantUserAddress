@@ -55,7 +55,7 @@ app.intent('Types Of Things Can Manage', (conv, {material}) => {
   console.log(`\nTypes Of Things Can Manage\n`);
   const userStorage = localStorage('userStorage');
 
-  if (!userStorage.address) {
+  if (!userStorage && userStorage.address) {
     return askForLocation(conv, material);
   }
 
