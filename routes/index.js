@@ -53,11 +53,13 @@ function getTypesOfThingsCanManageResponse(conv, paylaod) {
     });
 }
 
-app.intent('Types Of Things Can Manage', (conv, {material}) => {
-  console.log(`\nTypes Of Things Can Manage\n`);
+app.intent('Types Of Things Can Manage', (conv, {material, date}) => {
+  console.log(`\nIntent :: Types Of Things Can Manage\n`);
   const userStorage = localStorage('userStorage');
 
-  console.log(!(userStorage && userStorage.address), userStorage);
+  console.log('condition, material, date', !(userStorage && userStorage.address), material, date);
+  console.log('user condition ', userStorage);
+
   if (!(userStorage && userStorage.address)) {
     return askForLocation(conv, material);
   }
@@ -67,7 +69,7 @@ app.intent('Types Of Things Can Manage', (conv, {material}) => {
 });
 
 app.intent('How To Manage Things', (conv, {material}) => {
-  console.log(`\nHow To Manage Things\n`);
+  console.log(`\nIntent :: How To Manage Things\n`);
 
   const paylaod = {material: material};
   console.log(`paylaod : `, paylaod, `\n`);
