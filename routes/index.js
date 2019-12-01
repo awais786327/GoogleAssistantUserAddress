@@ -60,7 +60,7 @@ app.intent('Types Of Things Can Manage', (conv, {material}) => {
     return askForLocation(conv, material);
   }
 
-  const paylaod = {material: material, ...userStorage.location, address: userStorage.address};
+  const paylaod = {material: material, location: userStorage.location, address: userStorage.address};
   return getTypesOfThingsCanManageResponse(conv, paylaod);
 });
 
@@ -108,7 +108,7 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
 
   conv.ask(`Thanks! Now i have your details stored with me`);
 
-  const paylaod = {material: userStorage.material, ...userStorage.location, address: userStorage.address};
+  const paylaod = {material: userStorage.material, location: userStorage.location, address: userStorage.address};
   return getTypesOfThingsCanManageResponse(conv, paylaod);
 });
 
