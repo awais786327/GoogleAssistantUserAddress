@@ -102,7 +102,7 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
 
   if (userStorage.requestedPermissionType === 'DEVICE_PRECISE_LOCATION') {
     const {coordinates, formattedAddress} = conv.device.location;
-    console.log(conv.device);
+    console.log(conv);
     userStorage['address'] = formattedAddress;
     userStorage['location'] = {
       latitude: coordinates.latitude,
