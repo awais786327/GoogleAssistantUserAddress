@@ -87,6 +87,7 @@ app.intent('How To Manage Things', (conv, {material}) => {
 });
 
 app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
+  console.log('Location Permission Granted');
   if (!permissionGranted) {
     return conv.close(`Sorry Permission Denied So i can't help anymore`);
   }
