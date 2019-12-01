@@ -40,6 +40,7 @@ function askForLocation(conv, material) {
 }
 
 function getTypesOfThingsCanManageResponse(conv, paylaod) {
+  console.log(`paylaod : `, paylaod, `\n`);
   return axios.post(getAddressResponseAPI, paylaod)
     .then(response => {
       console.log(`response : `, response.data, `\n`);
@@ -47,7 +48,6 @@ function getTypesOfThingsCanManageResponse(conv, paylaod) {
     })
     .catch(error => {
       console.log(`error : `, error.response.statusText, `\n`);
-      console.log(conv);
       return conv.close(`I'm not feeling better today so please ask me later`);
     });
 }
@@ -56,15 +56,11 @@ app.intent('Types Of Things Can Manage', (conv, {material}) => {
   console.log(`\nTypes Of Things Can Manage\n`);
   const userStorage = localStorage('userStorage');
 
-  console.log(userStorage, material);
-
   if (!(userStorage && userStorage.address)) {
     return askForLocation(conv, material);
   }
 
   const paylaod = {material: material, ...userStorage.location, address: userStorage.address};
-  console.log(`paylaod : `, paylaod, `\n`);
-
   return getTypesOfThingsCanManageResponse(conv, paylaod);
 });
 
