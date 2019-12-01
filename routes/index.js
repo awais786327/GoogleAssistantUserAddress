@@ -56,14 +56,16 @@ app.intent('Types Of Things Can Manage', (conv, {material, date}) => {
   console.log(`\nIntent :: Types Of Things Can Manage\n`);
   const userStorage = localStorage('userStorage');
 
-  console.log('condition, material, date', !(userStorage && userStorage.address), material, date);
-  console.log('user condition ', userStorage);
+  if(date) {
+    userStorage['date'] = date;
+    localStorage('userStorage', userStorage);
+  }
 
   if (!(userStorage && userStorage.address)) {
     return askForLocation(conv, material);
   }
 
-  const paylaod = {material: material, location: userStorage.location, address: userStorage.address};
+  const paylaod = {date: (date || null), material: material, location: userStorage.location, address: userStorage.address};
   return getTypesOfThingsCanManageResponse(conv, paylaod);
 });
 
@@ -110,7 +112,7 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
 
   conv.ask(`Thanks! Now i have your details stored with me`);
 
-  const paylaod = {material: userStorage.material, location: userStorage.location, address: userStorage.address};
+  const paylaod = {date: userStorage.date || null, material: userStorage.material, location: userStorage.location, address: userStorage.address};
   return getTypesOfThingsCanManageResponse(conv, paylaod);
 });
 
