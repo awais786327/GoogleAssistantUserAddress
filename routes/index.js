@@ -30,8 +30,8 @@ function askForLocation(conv, material) {
   const permissionContext = `I can't assist you because i'dont have your location details therefore to assist you better about ${material} \ni'll need to locate you and for that`;
   const requestedPermissionType = conv.surface.capabilities.has('actions.capability.SCREEN_OUTPUT') ? 'DEVICE_PRECISE_LOCATION' : 'DEVICE_COARSE_LOCATION';
   const userStorage = localStorage('userStorage');
-  userStorage.material = material;
-  userStorage.requestedPermissionType = requestedPermissionType;
+  userStorage['material'] = material;
+  userStorage['requestedPermissionType'] = requestedPermissionType;
   localStorage('userStorage', userStorage);
   return conv.ask(new Permission({
     context: permissionContext,
@@ -95,13 +95,13 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
   const {city, coordinates, formattedAddress} = conv.device.location;
 
   if (userStorage.requestedPermissionType === 'DEVICE_COARSE_LOCATION') {
-    userStorage.address = formattedAddress;
-    userStorage.location = city;
+    userStorage['address'] = formattedAddress;
+    userStorage['location'] = city;
   }
 
   if (userStorage.requestedPermissionType === 'DEVICE_PRECISE_LOCATION') {
-    userStorage.address = formattedAddress;
-    userStorage.location = {
+    userStorage['address'] = formattedAddress;
+    userStorage['location'] = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     };
