@@ -40,7 +40,6 @@ function askForLocation(conv, material) {
 }
 
 function getTypesOfThingsCanManageResponse(conv, paylaod) {
-  console.log(`paylaod : `, paylaod, `\n`);
   return axios.post(getAddressResponseAPI, paylaod)
     .then(response => {
       console.log(`response : `, response.data, `\n`);
@@ -110,8 +109,7 @@ app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
   conv.ask(`Thanks! Now i have your details stored with me`);
 
   const paylaod = {material: userStorage.material, ...userStorage.location, address: userStorage.address};
-  console.log('Location Permission Granted paylaod ', paylaod);
-  return getTypesOfThingsCanManageResponse(paylaod);
+  return getTypesOfThingsCanManageResponse(conv, paylaod);
 });
 
 app.intent('Clear Storage', (conv) => {
