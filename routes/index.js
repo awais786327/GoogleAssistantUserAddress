@@ -40,6 +40,7 @@ function askForLocation(conv, material) {
 }
 
 function getTypesOfThingsCanManageResponse(conv, paylaod) {
+  console.log(`paylaod : `, paylaod, `\n`);
   return axios.post(getAddressResponseAPI, paylaod)
     .then(response => {
       console.log(`response : `, response.data, `\n`);
@@ -76,13 +77,12 @@ app.intent('How To Manage Things', (conv, {material}) => {
       return conv.ask(`Would you like to ask anything ?`);
     })
     .catch(error => {
-      console.log(`error : `, error, `\n`);
+      console.log(`error : `, error.response.statusText, `\n`);
       return conv.close(`I'm not feeling better today so please ask me later`);
     });
 });
 
 app.intent('Location Permission Granted', (conv, params, permissionGranted) => {
-  console.log('Location Permission Granted');
   if (!permissionGranted) {
     return conv.close(`Sorry Permission Denied So i can't help anymore`);
   }
