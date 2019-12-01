@@ -46,7 +46,7 @@ function getTypesOfThingsCanManageResponse(conv, paylaod) {
       return conv.ask(`${response.data.text} \n\n Would you like to ask anything ?`);
     })
     .catch(error => {
-      console.log(`error : `, error, `\n`);
+      console.log(`error : `, error.response.statusText, `\n`);
       return conv.close(`I'm not feeling better today so please ask me later`);
     });
 }
